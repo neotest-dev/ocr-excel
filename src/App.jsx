@@ -387,33 +387,45 @@ function App() {
   const rawLineCount = ocrText.split('\n').map((line) => line.trim()).filter(Boolean).length
 
   return (
-    <main className="min-h-screen px-4 py-6 text-slate-100 sm:px-6 lg:px-10">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-6 flex flex-col gap-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-300/80">
-            Google Lens a Excel
-          </p>
-          <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Pega, ordena y exporta.
-          </h1>
-          <p className="max-w-2xl text-sm text-slate-300 sm:text-base">
-            Pega el texto de Google Lens a la izquierda. La tabla se arma al lado para
-            corregir, copiar o descargar.
-          </p>
+    <main className="min-h-screen bg-[#1f1f1f] text-[#111827]">
+      <div className="border-b border-black/40 bg-[#111111] text-white">
+        <div className="flex items-center gap-6 px-4 py-3 text-sm">
+          <span className="font-medium text-[#d4d4d4]">Archivo</span>
+          <span className="font-medium text-[#d4d4d4]">Inicio</span>
+          <span className="font-medium text-[#d4d4d4]">Insertar</span>
+          <span className="font-medium text-[#d4d4d4]">Datos</span>
+          <span className="font-medium text-[#d4d4d4]">Revisar</span>
+          <div className="ml-auto rounded bg-[#2a2a2a] px-3 py-1 text-xs text-[#cbd5e1]">
+            Hoja local
+          </div>
         </div>
+        <div className="border-t border-white/5 bg-[#181818] px-4 py-2 text-xs text-[#a3a3a3]">
+          Pegar texto, validar con BD y exportar resultados
+        </div>
+      </div>
 
-        <section className="grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)]">
-          <div className="rounded-3xl border border-white/10 bg-slate-950/70 p-4 shadow-2xl shadow-black/30 backdrop-blur sm:p-5">
+      <div className="border-b border-black/20 bg-[#2b2b2b] px-4 py-2 text-white">
+        <div className="grid grid-cols-[96px_minmax(0,1fr)] items-center gap-3">
+          <div className="rounded border border-white/10 bg-[#1f1f1f] px-2 py-1 text-sm">A1</div>
+          <div className="rounded border border-white/10 bg-[#1f1f1f] px-3 py-1.5 text-sm text-[#d1d5db]">
+            Editor de registros
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-[1600px] p-4">
+        <section className="grid gap-4 xl:grid-cols-[340px_minmax(0,1fr)]">
+          <div className="rounded-2xl border border-[#c9cfd8] bg-[#f3f4f6] p-4 shadow-sm">
             <div className="mb-3 flex items-center justify-between gap-3">
               <div>
-                <h2 className="text-lg font-semibold text-white">Texto de Google Lens</h2>
-                <p className="text-sm text-slate-400">Pega numeros y nombres como salgan.</p>
+                <h2 className="text-base font-semibold text-[#111827]">Entrada</h2>
+                <p className="text-sm text-[#4b5563]">Pega aqui el texto de Google Lens.</p>
               </div>
               <div className="flex flex-wrap gap-2">
                 <button
                   type="button"
                   onClick={handlePasteText}
-                  className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-sm font-medium text-emerald-200 transition hover:bg-emerald-400/20"
+                  className="inline-flex items-center gap-2 rounded-md border border-[#c7d2fe] bg-white px-3 py-2 text-sm font-medium text-[#1f2937] transition hover:bg-[#eef2ff]"
                 >
                   <CopyIcon />
                   Pegar
@@ -421,7 +433,7 @@ function App() {
                 <button
                   type="button"
                   onClick={handleClearText}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10"
+                  className="inline-flex items-center gap-2 rounded-md border border-[#fecaca] bg-white px-3 py-2 text-sm font-medium text-[#991b1b] transition hover:bg-[#fef2f2]"
                 >
                   <TrashIcon />
                   Limpiar
@@ -429,12 +441,12 @@ function App() {
               </div>
             </div>
 
-            <label className="mb-3 flex cursor-pointer items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200 transition hover:bg-white/10">
+            <label className="mb-3 flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-[#d1d5db] bg-white px-4 py-3 text-sm text-[#111827] transition hover:bg-[#f9fafb]">
               <div>
-                <div className="font-medium text-white">Base Excel</div>
-                <div className="text-xs text-slate-400">Carga `bd.xlsx` con hoja `bd`</div>
+                <div className="font-medium text-[#111827]">Base Excel</div>
+                <div className="text-xs text-[#6b7280]">Carga `bd.xlsx` con hoja `bd`</div>
               </div>
-              <div className="truncate text-right text-xs text-slate-400">{bdFileName || 'Seleccionar archivo'}</div>
+              <div className="truncate text-right text-xs text-[#6b7280]">{bdFileName || 'Seleccionar archivo'}</div>
               <input type="file" accept=".xlsx,.xls,.xlsm" onChange={handleBdFileChange} className="hidden" />
             </label>
 
@@ -442,26 +454,27 @@ function App() {
               value={ocrText}
               onChange={(event) => handleTextChange(event.target.value)}
               placeholder="Pega aqui"
-              className="min-h-[420px] w-full rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-4 text-sm text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-sky-400/50 focus:ring-4 focus:ring-sky-400/10"
+              className="min-h-[520px] w-full rounded-xl border border-[#d1d5db] bg-white px-4 py-4 font-mono text-sm text-[#111827] outline-none transition placeholder:text-[#9ca3af] focus:border-[#60a5fa] focus:ring-4 focus:ring-[#bfdbfe]"
             />
 
-            <div className="mt-3 text-sm text-slate-400">
-              Lineas detectadas: <span className="font-semibold text-slate-200">{rawLineCount}</span>
+            <div className="mt-3 text-sm text-[#4b5563]">
+              Lineas detectadas: <span className="font-semibold text-[#111827]">{rawLineCount}</span>
             </div>
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-slate-950/70 p-4 shadow-2xl shadow-black/30 backdrop-blur sm:p-5">
-            <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="overflow-hidden rounded-2xl border border-[#bfc7d1] bg-white shadow-sm">
+            <div className="border-b border-[#d1d5db] bg-[#f3f4f6] px-4 py-3">
+              <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-lg font-semibold text-white">Tabla</h2>
-                <p className="text-sm text-slate-400">Filas armadas: {filledRows.length}</p>
+                <h2 className="text-base font-semibold text-[#111827]">Hoja</h2>
+                <p className="text-sm text-[#4b5563]">Filas armadas: {filledRows.length}</p>
               </div>
 
               <div className="flex flex-wrap gap-2">
                 <button
                   type="button"
                   onClick={handleAddRow}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10"
+                  className="inline-flex items-center gap-2 rounded-md border border-[#d1d5db] bg-white px-3 py-2 text-sm font-medium text-[#111827] transition hover:bg-[#f9fafb]"
                 >
                   <PlusIcon />
                   Agregar fila
@@ -470,7 +483,7 @@ function App() {
                   type="button"
                   onClick={handleCopyForExcel}
                   disabled={!filledRows.length}
-                  className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-sm font-medium text-emerald-200 transition hover:bg-emerald-400/20 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="inline-flex items-center gap-2 rounded-md border border-[#bbf7d0] bg-[#f0fdf4] px-3 py-2 text-sm font-medium text-[#166534] transition hover:bg-[#dcfce7] disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <CopyIcon />
                   Copiar
@@ -479,36 +492,37 @@ function App() {
                   type="button"
                   onClick={handleExport}
                   disabled={!filledRows.length}
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="inline-flex items-center gap-2 rounded-md bg-[#16a34a] px-3 py-2 text-sm font-semibold text-white transition hover:bg-[#15803d] disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <DownloadIcon />
                   Descargar
                 </button>
               </div>
             </div>
+            </div>
 
-            <div className="overflow-hidden rounded-2xl border border-white/10">
-              <div className="max-h-[520px] overflow-auto">
-                <table className="min-w-full divide-y divide-white/10 text-sm">
-                  <thead className="bg-white/5 text-slate-300">
+            <div className="overflow-hidden">
+              <div className="max-h-[680px] overflow-auto">
+                <table className="min-w-full border-collapse text-sm">
+                  <thead className="bg-[#111111] text-white">
                     <tr>
-                      <th className="px-4 py-3 text-left font-medium">DNI</th>
-                      <th className="px-4 py-3 text-left font-medium">APELLIDOS Y NOMBRES</th>
-                      <th className="px-4 py-3 text-left font-medium">ESTADO</th>
-                      <th className="px-4 py-3 text-left font-medium">Accion</th>
+                      <th className="border border-[#d1d5db] px-4 py-2 text-left font-medium">DNI</th>
+                      <th className="border border-[#d1d5db] px-4 py-2 text-left font-medium">APELLIDOS Y NOMBRES</th>
+                      <th className="border border-[#d1d5db] px-4 py-2 text-left font-medium">ESTADO</th>
+                      <th className="border border-[#d1d5db] px-4 py-2 text-left font-medium">ACCION</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/10 bg-slate-950/30">
+                  <tbody className="bg-white text-[#111827]">
                     {rows.map((row) => (
                       <tr
                         key={row.id}
                         className={`align-top transition ${
-                          activeRowId === row.id ? 'bg-sky-400/8 ring-1 ring-inset ring-sky-400/20' : ''
+                          activeRowId === row.id ? 'bg-[#dbeafe]' : 'hover:bg-[#f9fafb]'
                         }`}
                       >
-                        <td className="px-3 py-3">
+                        <td className="border border-[#e5e7eb] px-2 py-1">
                           <div className="relative">
-                            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">
+                            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[#9ca3af]">
                               <PencilIcon />
                             </span>
                             <input
@@ -517,13 +531,13 @@ function App() {
                               onFocus={() => setActiveRowId(row.id)}
                               onBlur={() => setActiveRowId((current) => (current === row.id ? '' : current))}
                               placeholder="0018476"
-                              className="w-full rounded-xl border border-white/10 bg-slate-900/90 py-2 pl-10 pr-3 text-slate-100 outline-none transition focus:border-sky-400/50 focus:ring-4 focus:ring-sky-400/10"
+                              className="w-full rounded-none border border-transparent bg-transparent py-2 pl-10 pr-3 text-[#111827] outline-none transition focus:border-[#93c5fd] focus:bg-[#eff6ff]"
                             />
                           </div>
                         </td>
-                        <td className="px-3 py-3">
+                        <td className="border border-[#e5e7eb] px-2 py-1">
                           <div className="relative">
-                            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">
+                            <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[#9ca3af]">
                               <PencilIcon />
                             </span>
                             <input
@@ -532,18 +546,18 @@ function App() {
                               onFocus={() => setActiveRowId(row.id)}
                               onBlur={() => setActiveRowId((current) => (current === row.id ? '' : current))}
                               placeholder="Nombre completo"
-                              className="w-full rounded-xl border border-white/10 bg-slate-900/90 py-2 pl-10 pr-3 text-slate-100 outline-none transition focus:border-sky-400/50 focus:ring-4 focus:ring-sky-400/10"
+                              className="w-full rounded-none border border-transparent bg-transparent py-2 pl-10 pr-3 text-[#111827] outline-none transition focus:border-[#93c5fd] focus:bg-[#eff6ff]"
                             />
                           </div>
                         </td>
-                        <td className="px-3 py-3">
+                        <td className="border border-[#e5e7eb] px-2 py-1">
                           <span
                             className={`inline-flex rounded-full px-3 py-1 text-xs font-medium ${
                               row.status === 'matched'
-                                ? 'bg-emerald-400/15 text-emerald-200'
+                                ? 'bg-[#dcfce7] text-[#166534]'
                                 : row.status === 'missing' || row.status === 'pending'
-                                  ? 'bg-amber-400/15 text-amber-200'
-                                  : 'bg-slate-400/15 text-slate-300'
+                                  ? 'bg-[#fef3c7] text-[#92400e]'
+                                  : 'bg-[#e5e7eb] text-[#4b5563]'
                             }`}
                           >
                             {row.status === 'matched'
@@ -555,11 +569,11 @@ function App() {
                                   : 'Manual'}
                           </span>
                         </td>
-                        <td className="px-3 py-3">
+                        <td className="border border-[#e5e7eb] px-2 py-1">
                           <button
                             type="button"
                             onClick={() => handleDeleteRow(row.id)}
-                            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-rose-400/20 bg-rose-400/10 text-rose-200 transition hover:bg-rose-400/20"
+                            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[#fecaca] bg-[#fff1f2] text-[#b91c1c] transition hover:bg-[#ffe4e6]"
                             aria-label="Quitar fila"
                             title="Quitar fila"
                           >
@@ -573,7 +587,7 @@ function App() {
               </div>
             </div>
 
-            <p className="mt-3 text-sm text-slate-400">
+            <p className="border-t border-[#d1d5db] bg-[#f9fafb] px-4 py-3 text-sm text-[#4b5563]">
               {copyFeedback || 'Copiar genera texto tabulado listo para pegar directo en Excel.'}
             </p>
           </div>
